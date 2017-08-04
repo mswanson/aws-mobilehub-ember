@@ -7,13 +7,13 @@
       </span>
     </section>
     {{#if authentication.authenticated}}
-	    <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
         <div class="text-welcome">Hello, {{#link-to "account"}} {{cognito.user.username}} {{/link-to}}</div>
-	      <button class="mdc-button mdc-button--accent" {{action "logout"}}>Logout</button>
-	    </section>
+        <button class="mdc-button mdc-button--accent" {{action "logout"}}>Logout</button>
+      </section>
     {{/if}}
   </div>
 </header>
 <main class="mdc-toolbar-fixed-adjust">
-	{{yield}}
+  {{yield}}
 </main>

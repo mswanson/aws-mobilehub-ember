@@ -15,10 +15,10 @@ import Ember from 'ember';
 
 export function initialize(appInstance) {
   let cognito = appInstance.lookup('service:cognito'),
-  	  userPool = appInstance.lookup('cognito:userPool'),
-  	  auth = appInstance.lookup('service:authentication'),
-  	  session = appInstance.lookup('auth:session'),
-  	  user = appInstance.lookup('cognito:user'),
+      userPool = appInstance.lookup('cognito:userPool'),
+      auth = appInstance.lookup('service:authentication'),
+      session = appInstance.lookup('auth:session'),
+      user = appInstance.lookup('cognito:user'),
       token = appInstance.lookup('auth:token'),
       access = appInstance.lookup('auth:accessToken');
 
@@ -27,7 +27,7 @@ export function initialize(appInstance) {
     cognito.set('user', user);
     Ember.Logger.info('Cognito User initialized: ', user);
   }
-   
+
   // check if we have a previous session that we've logged in
   if (typeof session !== 'undefined') {
     cognito.set('id',session.IdentityId);
@@ -39,8 +39,8 @@ export function initialize(appInstance) {
     auth.set('token', token);
     auth.set('accessToken', access);
   }
-  
-  // if we have a user pool 
+
+  // if we have a user pool
   if (typeof userPool !== 'undefined') {
     cognito.set('userPool', userPool);
   }

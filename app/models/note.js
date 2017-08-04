@@ -15,10 +15,10 @@ import DS from 'ember-data';
 import attr from 'ember-data/attr';
 
 export default DS.Model.extend({
-	userId: attr('string'),
-	noteId: attr('string'),
-	content: attr('string'),
-	creationDate: attr('number'),
-	title: attr('string'),
-	pending: attr('boolean')
+  userId: attr('string'),
+  noteId: attr('string'),
+  content: attr('string'),
+  creationDate: attr('number'),
+  title: attr('string'),
+  pending: attr('boolean')
 });

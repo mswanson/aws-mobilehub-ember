@@ -1,4 +1,3 @@
-//https://gist.github.com/mlabieniec/523629a5f709fbbd58063530bf260196
 module.exports = {
   root: true,
   parserOptions: {
@@ -10,6 +9,5 @@ module.exports = {
     browser: true
   },
   rules: {
-    "no-mixed-spaces-and-tabs": 0
   }
 };

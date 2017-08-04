@@ -15,36 +15,36 @@ import Ember from 'ember';
 /**
  * This initializer will intiialize the AWS SDK before
  * the application loads. In this initilaizer we:
- * 
+ *
  *  - Intiialize the AWS-SDK for JavaScript
  *  - Restore any previous sessions
  *  - Register application values for application services
  */
 
 /* eslint no-undef: "off" */
-const idPool = 		aws_cognito_identity_pool_id || '',
+const idPool =      aws_cognito_identity_pool_id || '',
       /* eslint no-undef: "off" */
-  	  userPoolId = 	aws_user_pools_id || '',
+      userPoolId =  aws_user_pools_id || '',
       /* eslint no-undef: "off" */
-  	  appClientId = aws_user_pools_web_client_id || '',
+      appClientId = aws_user_pools_web_client_id || '',
       /* eslint no-undef: "off" */
-  	  region = 		aws_cognito_region || 'us-east-1';
+      region =      aws_cognito_region || 'us-east-1';
 
 /**
  * This function is run wether we have a previous session or not
- * 
+ *
  * @param application - the application instance
  * @param logins - any logins we want to setup for cognito identities
- * @param token - Cognito User Pools token 
+ * @param token - Cognito User Pools token
  */
 const getCredentials = (application, logins, token, accessToken) => {
-	let params = {
-		'IdentityPoolId': idPool
-	};
-	if (logins) {
-		params.Logins = logins;
-	}
-	// Add the User's Id Token to the Cognito credentials login map.
+  let params = {
+    'IdentityPoolId': idPool
+  };
+  if (logins) {
+    params.Logins = logins;
+  }
+  // Add the User's Id Token to the Cognito credentials login map.
     window.AWS.config.credentials = new window.AWS.CognitoIdentityCredentials(params);
     window.AWS.config.credentials.get(function(err) {
       if (err) {
@@ -62,7 +62,7 @@ const getCredentials = (application, logins, token, accessToken) => {
 };
 
 /**
- * Ember initializer 
+ * Ember initializer
  * @param application - Ember application instance
  */
 export function initialize(application) {
@@ -72,18 +72,18 @@ export function initialize(application) {
 
   window.AWS.config.region = region;
   window.AWS.config.credentials = new window.AWS.CognitoIdentityCredentials({
-	  'IdentityPoolId': idPool
+    'IdentityPoolId': idPool
   });
 
   // cognito user pool
-  let poolData = { 
-    'UserPoolId' : userPoolId, 
+  let poolData = {
+    'UserPoolId' : userPoolId,
     'ClientId' : appClientId
   },
   userPool = new window.AWSCognito.CognitoIdentityServiceProvider.CognitoUserPool(poolData),
   cognitoUser = userPool.getCurrentUser();
   application.register('cognito:userPool', userPool, {instantiate:false});
-  
+
 // Check if a cognito user is already logged in from local storage
   if (cognitoUser !== null) {
     cognitoUser.getSession(function(err, result) {
